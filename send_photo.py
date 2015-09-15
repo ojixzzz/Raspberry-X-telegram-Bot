@@ -18,7 +18,9 @@ def kirim_gambar(message):
 	chat_id = message.chat.id
 	filerand = 'gambar%s.jpg' % randint(1,5)
 	time.sleep(1)
+	print 'mulai capture'
 	camera.capture(filerand)
+	print 'selesai capture'
 	photo = open(filerand, 'rb')
 	bot.send_photo(chat_id, photo)
 	os.remove(filerand)
@@ -27,6 +29,7 @@ def kirim_gambar(message):
 @bot.message_handler(commands=['ambilgambarm'])
 def kirim_gambar(message):
 	camera = picamera.PiCamera()
+	camera.resolution = (100, 100)
 	camera.vflip = True
 	camera.framerate = Fraction(1, 6)
 	camera.shutter_speed = 6000000
@@ -34,7 +37,9 @@ def kirim_gambar(message):
 	camera.iso = 800
 	chat_id = message.chat.id
 	filerand = 'gambar%s.jpg' % randint(1,5)
+	print 'mulai capture'
 	camera.capture(filerand)
+	print 'selesai capture'
 	photo = open(filerand, 'rb')
 	bot.send_photo(chat_id, photo)
 	os.remove(filerand)
