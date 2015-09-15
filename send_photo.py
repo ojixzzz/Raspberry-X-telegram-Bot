@@ -2,6 +2,7 @@ import os
 import telebot
 import picamera
 from random import randint
+from fractions import Fraction
 
 camera = picamera.PiCamera()
 camera.framerate = Fraction(1, 6)
