@@ -1,8 +1,13 @@
+import os
 import telebot
 import picamera
-from StringIO import StringIO
+from random import randint
 
 camera = picamera.PiCamera()
+camera.framerate = Fraction(1, 6)
+camera.shutter_speed = 6000000
+camera.exposure_mode = 'off'
+camera.iso = 800
 bot = telebot.TeleBot("128892495:AAG0wYE55Vfi8QXutqPIuaquxiDPbxg-mtc")
 
 @bot.message_handler(commands=['start', 'help'])
@@ -12,10 +17,11 @@ def send_welcome(message):
 @bot.message_handler(commands=['ambilgambar'])
 def kirim_gambar(message):
 	chat_id = message.chat.id
-	gambarnya = StringIO()
-	camera.capture(gambarnya, format='jpeg')
+	filerand = 'gambar%s.jpg' % randint(1,5)
+	camera.capture(filerand)
+	photo = open(filerand, 'rb')
 	bot.send_photo(chat_id, gambarnya)
-	bot.send_photo(chat_id, "FILEID")
+	os.remove(filerand)
 	
 @bot.message_handler(func=lambda m: True)
 def echo_all(message):
