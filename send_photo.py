@@ -21,7 +21,7 @@ def kirim_gambar(message):
 	filerand = 'gambar%s.jpg' % randint(1,5)
 	camera.capture(filerand)
 	photo = open(filerand, 'rb')
-	bot.send_photo(chat_id, gambarnya)
+	bot.send_photo(chat_id, photo)
 	os.remove(filerand)
 	
 @bot.message_handler(func=lambda m: True)
