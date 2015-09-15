@@ -21,7 +21,7 @@ def kirim_gambar(message):
 	bot.send_photo(chat_id, photo)
 	os.remove(filerand)
 
-@bot.message_handler(commands=['ambilgambar'])
+@bot.message_handler(commands=['ambilgambarm'])
 def kirim_gambar(message):
 	camera.framerate = Fraction(1, 6)
 	camera.shutter_speed = 6000000
