@@ -13,9 +13,9 @@ def send_welcome(message):
 def kirim_gambar(message):
 	chat_id = message.chat.id
 	gambarnya = StringIO()
-	camera.capture(gambarnya)
-	tb.send_photo(chat_id, gambarnya)
-	tb.send_photo(chat_id, "FILEID")
+	camera.capture(gambarnya, format='jpeg')
+	bot.send_photo(chat_id, gambarnya)
+	bot.send_photo(chat_id, "FILEID")
 	
 @bot.message_handler(func=lambda m: True)
 def echo_all(message):
