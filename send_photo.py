@@ -4,7 +4,6 @@ import picamera
 from random import randint
 from fractions import Fraction
 
-camera = picamera.PiCamera()
 camera.hflip = True
 bot = telebot.TeleBot("128892495:AAG0wYE55Vfi8QXutqPIuaquxiDPbxg-mtc")
 
@@ -14,15 +13,18 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['ambilgambar'])
 def kirim_gambar(message):
+	camera = picamera.PiCamera()
 	chat_id = message.chat.id
 	filerand = 'gambar%s.jpg' % randint(1,5)
 	camera.capture(filerand)
 	photo = open(filerand, 'rb')
 	bot.send_photo(chat_id, photo)
 	os.remove(filerand)
+	camera.close()
 
 @bot.message_handler(commands=['ambilgambarm'])
 def kirim_gambar(message):
+	camera = picamera.PiCamera()
 	camera.framerate = Fraction(1, 6)
 	camera.shutter_speed = 6000000
 	camera.exposure_mode = 'off'
@@ -33,6 +35,7 @@ def kirim_gambar(message):
 	photo = open(filerand, 'rb')
 	bot.send_photo(chat_id, photo)
 	os.remove(filerand)
+	camera.close()
 
 @bot.message_handler(func=lambda m: True)
 def echo_all(message):
