@@ -1,4 +1,5 @@
 import os
+import time
 import telebot
 import picamera
 from random import randint
@@ -13,10 +14,10 @@ def send_welcome(message):
 @bot.message_handler(commands=['ambilgambar'])
 def kirim_gambar(message):
 	camera = picamera.PiCamera()
-	camera.hflip = True
 	camera.vflip = True
 	chat_id = message.chat.id
 	filerand = 'gambar%s.jpg' % randint(1,5)
+	time.sleep(1)
 	camera.capture(filerand)
 	photo = open(filerand, 'rb')
 	bot.send_photo(chat_id, photo)
@@ -26,7 +27,6 @@ def kirim_gambar(message):
 @bot.message_handler(commands=['ambilgambarm'])
 def kirim_gambar(message):
 	camera = picamera.PiCamera()
-	camera.hflip = True
 	camera.vflip = True
 	camera.framerate = Fraction(1, 6)
 	camera.shutter_speed = 6000000
